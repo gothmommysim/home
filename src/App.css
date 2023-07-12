@@ -1,38 +1,214 @@
 .App {
+  background-color: #000000;
   text-align: center;
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+  z-index: 1;
+  border: 2px solid #fe46a5;
+  height: 20vmin;
+}
+
+.container {
+  display: flex;
+  align-items: center;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+    animation: App-logo-pulse infinite 20s linear;
+  }
+  .App-mainHeader:hover {
+    animation: App-mainHeader-hover infinite 1s linear;
+  }
+  .App-nav-option:hover {
+    animation: App-nav-hover infinite 1s linear;
+    cursor: pointer;
+  }
+  .App-nav.clicked {
+    animation: App-nav-hide 750ms linear;
+  }
+  .App-nav-option.clicked {
+    animation: App-nav-select 750ms linear;
   }
 }
 
+@font-face {
+  font-family: 'annika';
+  src: url("font/annika.otf") format('opentype');
+}
+
+@font-face {
+  font-family: 'kinky';
+  src: url("font/kinky.otf") format('opentype');
+}
+
 .App-header {
-  background-color: #282c34;
+  opacity: 0;
+  animation: App-nav-show 3s;
+  animation-fill-mode: forwards;
+
+  white-space: pre;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  font-size: calc(48px + 2vmin);
+  color: #000000;
+  -webkit-text-stroke: 2px #fe46a5;
+  font-family: kinky;
+}
+
+.App-readable {
+  font-family: Tamuragaki;
+}
+
+.App-content {
+  white-space: normal;
+  max-width: 1200px;
+  text-align: left;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  margin-left: 32px;
+  font-size: calc(4px + 2vmin);
+  color: #ffffff;
+  -webkit-text-stroke: initial;
+  font-family: annika;
+}
+
+.App-nav {
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 32px;
+  font-size: calc(16px + 2vmin);
+  color: #fe46a5;
+  -webkit-text-stroke: 3px black;
+  font-family: annika;
+  user-select: none;
+}
+
+.App-nav-option:not(:last-child) {
+  margin-bottom: 8px;
 }
 
 .App-link {
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@keyframes App-logo-pulse {
+  0% {
+    border: 4px solid #fe46a5;
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+    border: 4px solid white;
+  }
+  100% {
+    border: 4px solid #fe46a5;
+  }
+}
+
+@keyframes App-logo-shake {
+  0%{
+    transform: rotate(-10deg);
+  }
+  49%{
+    transform: rotate(-10deg);
+  }
+  50%{
+    transform: rotate(10deg);
+  }
+  99%{
+    transform: rotate(10deg);
+  }
+  100%{
+    transform: rotate(-10deg);
+  }
+}
+
+@keyframes App-nav-hover {
+  0%{
+    color: rgb(255, 171, 215);
+    transform: rotate(-1deg);
+    text-decoration: underline;
+  }
+  49%{
+    color: rgb(255, 171, 215);
+    transform: rotate(-1deg);
+  }
+  50%{
+    color: #fe46a5;
+    transform: rotate(1deg);
+  }
+  99%{
+    color: #fe46a5;
+    transform: rotate(1deg);
+  }
+  100%{
+    color: rgb(255, 171, 215);
+    transform: rotate(-1deg);
+    text-decoration: underline;
+  }
+}
+
+@keyframes App-mainHeader-hover {
+  0%{
+    color: rgb(255, 171, 215);
+    transform: rotate(-1deg);
+  }
+  49%{
+    color: rgb(255, 171, 215);
+    transform: rotate(-1deg);
+  }
+  50%{
+    color: #fe46a5;
+    transform: rotate(1deg);
+  }
+  99%{
+    color: #fe46a5;
+    transform: rotate(1deg);
+  }
+  100%{
+    color: rgb(255, 171, 215);
+    transform: rotate(-1deg);
+  }
+}
+
+@keyframes App-nav-select {
+  5%{
+    color: white;
+    font-size: calc(24px + 2vmin);
+
+  }
+  60%{
+    opacity: 10%;
+  }
+  to{
+    font-size: 0px;
+    margin-left: -2em;
+    letter-spacing: -0.5em;
+    opacity: 0;
+  }
+}
+
+@keyframes App-nav-hide {
+  40%{
+    opacity: 10%;
+
+  }
+  to{
+    opacity: 0;
+  }
+}
+
+@keyframes App-nav-show {
+  from{
+    opacity: 0%;
+
+  }
+  to{
+    opacity: 100%;
   }
 }

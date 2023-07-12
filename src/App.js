@@ -1,25 +1,38 @@
-import logo from './logo.svg';
 import './App.css';
+import {useState} from "react";
+import ContentBlock from "./components/ContentBlock";
+import NavBar from "./components/NavBar";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [navigate, setNavigate] = useState(null);
+    const [mainHeader, setMainHeader] = useState("sim sealy");
+
+
+
+    const handleInteract = (option) => {
+        setTimeout(() =>{
+            setNavigate(option);
+            if(option !== "NavBar"){
+                setMainHeader(option);
+            }else if(mainHeader!=="sim sealy"){
+                setMainHeader("sim sealy");
+            }
+        }, 500);
+    }
+
+    return (
+        <div className="App">
+            <header className="App-header">
+                <p className="App-mainHeader" style={{cursor: "pointer"}} onClick={()=>handleInteract('NavBar')}>
+                    ★ {mainHeader} ★
+                </p>
+                <ContentBlock content={navigate} handleInteract={handleInteract}/>
+                <p>
+                    ★
+                </p>
+            </header>
+        </div>
+    );
 }
 
 export default App;
